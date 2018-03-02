@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-navbar (click)="goBack()">
+      <ion-title>Firmante</ion-title>
+    </ion-navbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form #firmanteForm="ngForm" (ngSubmit)="btnGuardar(firmanteForm)" role="form">
+
+    <ion-card>
+      <img *ngIf="firmante.UrlFirma && !nuevaImg" [src]="firmante.UrlFirma">
+      <img *ngIf="!firmante.UrlFirma && !nuevaImg" src="../../assets/imgs/not-firma.png">
+      <img *ngIf="nuevaImg" src="data:image/png;base64,{{imageFileName}}">
+
+      <ion-fab right top>
+        <button ion-fab type="button" (click)="getImage()">
+          <ion-icon ios="ios-image" md="md-image"></ion-icon>
+        </button>
+      </ion-fab>
+
+      <ion-item>
+        <ion-input name="Nombre" [(ngModel)]="firmante.Nombre" type="text" placeholder="Nombre" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="Rut" [(ngModel)]="firmante.Rut" placeholder="Rut" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left full small>
+            <ion-icon ios="ios-add" md="md-add"></ion-icon>
+            <div>Guardar</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button color="danger" type="button" icon-left full small (click)="btnBorrar()">
+            <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            <div>Borrar</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+  </form>
+
+</ion-content>

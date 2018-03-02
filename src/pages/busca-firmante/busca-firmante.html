@@ -1,0 +1,19 @@
+<ion-header>
+
+
+  <ion-navbar (click)="goBack()">
+    <ion-title>Busca Firma</ion-title>
+  </ion-navbar>
+  <ion-searchbar (keyup.enter)="btnBuscar($event)"></ion-searchbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+
+    <img *ngIf="!loading && firmaImg" id="FirmaImage" [src]="firmaImg" class="img-responsive img-thumbnail animated  fadeIn">
+
+  </ion-card>
+
+</ion-content>
