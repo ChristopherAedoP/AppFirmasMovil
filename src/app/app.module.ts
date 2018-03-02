@@ -19,11 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetalleFirmantePage } from '../pages/detalle-firmante/detalle-firmante';
 
 //subida de archivos
-import {
-  FileTransfer,
-  FileUploadOptions,
-  FileTransferObject
-} from '@ionic-native/file-transfer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { UploadService } from '../providers/upload.service';
@@ -67,7 +63,6 @@ import { BuscaFirmantePage } from '../pages/busca-firmante/busca-firmante';
     FirmantesProvider,
     UsuarioService,
     FileTransfer,
-    // FileUploadOptions,
     FileTransferObject,
     File,
     Camera,

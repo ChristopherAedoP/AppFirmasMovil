@@ -4,14 +4,11 @@ import {
   NavController,
   NavParams,
   ViewController,
-  ActionSheetController,
   ToastController,
-  Platform,
   LoadingController,
   Loading,
   AlertController
 } from 'ionic-angular';
-import { FirmantesPage } from '../firmantes/firmantes';
 import { UsuarioService } from '../../providers/usuario.service';
 import { FirmantesProvider } from '../../providers/firmantes/firmantes';
 

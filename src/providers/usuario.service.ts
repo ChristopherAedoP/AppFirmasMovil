@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { GLOBAL } from './global';
 
 import { Observable } from 'rxjs/Rx';
-import { Response, Headers, RequestOptions } from '@angular/http';
 import { Usuario } from '../models/usuario';
 
 @Injectable()
@@ -35,17 +34,6 @@ export class UsuarioService {
       .catch((error: any) => Observable.throw(error));
   }
   signupToken(user_to_login: Usuario) {
-    const _headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
-    let options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
     let body = new URLSearchParams();
     body.set('grant_type', 'password');
     body.set('UserName', user_to_login.UserName);
