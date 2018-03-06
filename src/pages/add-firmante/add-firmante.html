@@ -21,14 +21,14 @@
 
 
     <ion-list>
-      <form #SimulacionForm="ngForm" (ngSubmit)="btnGuardar(SimulacionForm)" role="form">
+      <form ngNativeValidate #SimulacionForm="ngForm" (ngSubmit)="btnGuardar(SimulacionForm)" role="form">
         <ion-item>
           <ion-label floating>Rut</ion-label>
           <ion-input name="Rut" [(ngModel)]="firmante.Rut" type="text" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Nombre</ion-label>
-          <ion-input name="Nombre" [(ngModel)]="firmante.Nombre" type="text"></ion-input>
+          <ion-input name="Nombre" [(ngModel)]="firmante.Nombre" type="text" required></ion-input>
         </ion-item>
         <ion-item>
           <button ion-button block icon-right>

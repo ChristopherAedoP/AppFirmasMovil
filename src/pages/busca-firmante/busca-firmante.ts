@@ -38,7 +38,7 @@ export class BuscaFirmantePage {
   }
   public muestraLoading() {
     this.loadingpop = this.loadingCtrl.create({
-      content: 'Buscando firmas....'
+      content: 'Buscando firma....'
     });
 
     this.loadingpop.present();
@@ -71,8 +71,11 @@ export class BuscaFirmantePage {
   presentToast() {
     let toast = this.toastCtrl.create({
       message: 'No se encontro firma.',
+
+      duration: 5000,
+      position: 'bottom',
       showCloseButton: true,
-      position: 'bottom'
+      closeButtonText: 'Cerrar'
     });
 
     toast.present();

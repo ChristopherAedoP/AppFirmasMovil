@@ -12,7 +12,7 @@ import {
 import { UsuarioService } from '../../providers/usuario.service';
 import { FirmantesProvider } from '../../providers/firmantes/firmantes';
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { GLOBAL } from '../../providers/global';
 
 @Component({
@@ -51,6 +51,7 @@ export class DetalleFirmantePage {
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad DetalleFirmantePage');
   // }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }
@@ -72,8 +73,8 @@ export class DetalleFirmantePage {
     this._sf
       .addFirmanteImg(this._us.getToken(), this.firmante.Id, imgbase64)
       .subscribe(
-        response => {
-          // console.log(response);
+        (response: any) => {
+          console.log(response);
           this.firmante.IdFirma = response.idFirma;
           this.firmante.UrlFirma = response.urlFirma;
           // console.log(this.firmante);
@@ -84,14 +85,14 @@ export class DetalleFirmantePage {
               this.loading.dismiss();
             },
             error => {
-              console.log('Error  update', error);
-              console.error(<any>error);
+              console.log(error);
+              // console.error(<any>error);
             }
           );
         },
         error => {
-          console.log('Error  img', error);
-          console.error(<any>error);
+          console.log(<any>error);
+          // console.error(<any>error);
           this.loading.dismiss();
         }
       );
@@ -107,13 +108,24 @@ export class DetalleFirmantePage {
   //////////////////////////////
   //
   getImage() {
-    const options: CameraOptions = {
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    // };
+
+    const options2 = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: this.camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      saveToPhotoAlbum: false
     };
 
-    this.camera.getPicture(options).then(
+    this.camera.getPicture(options2).then(
       imageData => {
         this.imageURI = imageData;
         this.imageFileName = imageData;
@@ -130,7 +142,9 @@ export class DetalleFirmantePage {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 3000,
-      position: 'bottom'
+      position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'Cerrar'
     });
 
     toast.onDidDismiss(() => {
@@ -166,8 +180,8 @@ export class DetalleFirmantePage {
                   this.loading.dismiss();
                 },
                 error => {
-                  console.error(<any>error);
-                  alert('Error en el servidor al eliminar firmante.');
+                  console.log(error);
+                  this.presentToast('Error Borrar Firmante.');
                   this.loading.dismiss();
                 }
               );

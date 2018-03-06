@@ -1,11 +1,16 @@
 import { Firma } from './../../models/firma';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from '../global';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+
 import { Firmante } from '../../models/firmante';
 /*
   Generated class for the FirmantesProvider provider.
@@ -27,9 +32,7 @@ export class FirmantesProvider {
     return this._http
       .get(_url)
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   getFirmante(id: string) {
@@ -38,15 +41,14 @@ export class FirmantesProvider {
     return this._http
       .get(_url)
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-  addFirmante(token, firmantes: Firmante) {
+  addFirmante(token, firmante: Firmante) {
     const _url = `${this.urlHostAPI}/api/Firmante `;
-
-    const body = JSON.stringify(firmantes);
+    // console.log('addFirmante', firmante);
+    // console.log('token', token);
+    const body = JSON.stringify(firmante);
 
     const headers = new HttpHeaders({
       Authorization: token,
@@ -56,9 +58,10 @@ export class FirmantesProvider {
     return this._http
       .post(_url, body, { headers })
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch((err: HttpErrorResponse) => {
+        console.log(err);
+        return Observable.throw(err);
+      });
   }
 
   updateFirmante(token, firmantes: Firmante) {
@@ -76,9 +79,7 @@ export class FirmantesProvider {
     return this._http
       .put(_url, body, { headers })
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch((error: any) => error);
   }
 
   deleteFirmante(token, id) {
@@ -92,19 +93,19 @@ export class FirmantesProvider {
     return this._http
       .delete(_url, { headers })
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch(error => {
+        console.log(error);
+        return Observable.throw(error);
+      });
   }
+
   GetFirmaImage(rut) {
     const _url = `${this.urlHostAPI}/api/FirmaImagexRutBase64?rut=${rut} `;
 
     return this._http
       .get(_url)
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   addFirmanteImg(token: string, firmanteid: string, imgbase64: Firma) {
@@ -121,8 +122,9 @@ export class FirmantesProvider {
     return this._http
       .post(_url, body, { headers })
       .map(res => res)
-      .catch((error: any) =>
-        Observable.throw(error.json().error || 'Server error')
-      );
+      .catch(error => {
+        console.log(error);
+        return Observable.throw(error);
+      });
   }
 }

@@ -14,6 +14,12 @@
 
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="actualizaFirmantes($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText=" Tire para actualizar" refreshingSpinner="circles" refreshingText="Actualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-card-header>
       Lista de firmantes
@@ -22,7 +28,7 @@
       <ion-item *ngFor="let firmante of firmantes">
         <ion-thumbnail item-start>
           <img *ngIf="firmante.UrlFirma" [src]="firmante.UrlFirma">
-          <img *ngIf="!firmante.UrlFirma" src="../../assets/imgs/not-firma.png">
+          <img *ngIf="!firmante.UrlFirma" src="./assets/img/not-firma.png">
         </ion-thumbnail>
         <h2> {{firmante.Nombre}} </h2>
         <p>{{firmante.Rut}} </p>
@@ -31,3 +37,14 @@
     </ion-list>
   </ion-card>
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar>
+
+    <button ion-button icon-right full small (click)="buscaFirmantes()">
+      Actualizar
+      <ion-icon ios="ios-refresh" md="md-refresh"></ion-icon>
+    </button>
+
+  </ion-toolbar>
+</ion-footer> -->

@@ -13,8 +13,8 @@
 
     <ion-card>
       <img *ngIf="firmante.UrlFirma && !nuevaImg" [src]="firmante.UrlFirma">
-      <img *ngIf="!firmante.UrlFirma && !nuevaImg" src="../../assets/imgs/not-firma.png">
-      <img *ngIf="nuevaImg" src="data:image/png;base64,{{imageFileName}}">
+      <img *ngIf="!firmante.UrlFirma && !nuevaImg" src="./assets/imgs/not-firma.png">
+      <img *ngIf="nuevaImg" src="data:image/jpeg;base64,{{imageFileName}}">
 
       <ion-fab right top>
         <button ion-fab type="button" (click)="getImage()">
